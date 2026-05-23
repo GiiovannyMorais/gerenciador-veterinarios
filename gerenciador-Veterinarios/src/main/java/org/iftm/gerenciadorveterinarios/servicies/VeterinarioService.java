@@ -36,6 +36,13 @@ public class VeterinarioService {
 
     @Transactional
     public void apagar(Veterinario veterinario){
+
+    Optional<Veterinario> veterinarioBuscado = repositorio.findById(veterinario.getId());
+    
+    if (!veterinarioBuscado.isPresent()) {
+        throw new RuntimeException("Veterinário não encontrado para exclusão.");
+    }
         repositorio.delete(veterinario);
     }
+
 }
